@@ -1,4 +1,4 @@
-/*
+﻿/*
 
 STREAM:		abstract  
 CFileStream  file
@@ -121,13 +121,13 @@ StreamMode::StreamModes& operator&= (StreamMode::StreamModes& first, StreamMode:
 
 const int READF_ASYNC = 0x01;
 
-typedef struct
-{
-	long	lLo;
-	long    lHi;
-} QWORD, *LPQWORD;
+//typedef struct
+//{
+//	long	lLo;
+//	long    lHi;
+//} QWORD, *LPQWORD;
 
-// sowas wie abstrakter Basistyp f�r alle Streams
+// sowas wie abstrakter Basistyp f黵 alle Streams
 class STREAM
 {
 	private:

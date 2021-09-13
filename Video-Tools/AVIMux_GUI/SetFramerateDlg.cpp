@@ -49,7 +49,7 @@ void CSetFramerateDlg::SetData(FRAME_RATE* f)
 
 	//float dFramerate=dData;
 	char		Buffer[50];
-	//fr.frate = (double)(100*(round(dFramerate/100)));
+	//fr.frate = (double)(100*(avimux_round(dFramerate/100)));
 
 	if (bAllowEditUpdate)
 	{

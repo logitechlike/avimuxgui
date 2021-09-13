@@ -1,4 +1,4 @@
-// VideoInformationDlgListbox.cpp: Implementierungsdatei
+ï»¿// VideoInformationDlgListbox.cpp: Implementierungsdatei
 //
 
 #include "stdafx.h"
@@ -45,8 +45,8 @@ CVideoInformationDlgListbox::~CVideoInformationDlgListbox()
 void CVideoInformationDlgListbox::OnFinalRelease()
 {
 	// Nachdem die letzte Referenz auf ein Automatisierungsobjekt freigegeben wurde,
-	// wird OnFinalRelease aufgerufen. Die Basisklasse löscht das Objekt
-	// automatisch. Fügen Sie zusätzlichen Bereinigungscode für Ihr Objekt
+	// wird OnFinalRelease aufgerufen. Die Basisklasse lé°cht das Objekt
+	// automatisch. Fé»¦en Sie zusé‹žzlichen Bereinigungscode fé»µ Ihr Objekt
 	// hinzu, bevor Sie die Basisklasse aufrufen.
 
 	CListBox::OnFinalRelease();
@@ -61,12 +61,12 @@ END_MESSAGE_MAP()
 
 BEGIN_DISPATCH_MAP(CVideoInformationDlgListbox, CListBox)
 	//{{AFX_DISPATCH_MAP(CVideoInformationDlgListbox)
-		// HINWEIS - Der Klassen-Assistent fügt hier Zuordnungsmakros ein und entfernt diese.
+		// HINWEIS - Der Klassen-Assistent fé»¦t hier Zuordnungsmakros ein und entfernt diese.
 	//}}AFX_DISPATCH_MAP
 END_DISPATCH_MAP()
 
-// Hinweis: Wir stellen Unterstützung für IID_IVideoInformationDlgListbox zur Verfügung, um typsicheres Binden
-//  von VBA zu ermöglichen. Diese IID muss mit der GUID übereinstimmen, die in der
+// Hinweis: Wir stellen Untersté»·zung fé»µ IID_IVideoInformationDlgListbox zur Verfé»¦ung, um typsicheres Binden
+//  von VBA zu ermé°ƒlichen. Diese IID muss mit der GUID é»šereinstimmen, die in der
 //  Disp-Schnittstelle in der .ODL-Datei angegeben ist.
 
 // {2E22572D-43EB-4143-930C-308F680B55B1}
@@ -78,11 +78,11 @@ BEGIN_INTERFACE_MAP(CVideoInformationDlgListbox, CListBox)
 END_INTERFACE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// Behandlungsroutinen für Nachrichten CVideoInformationDlgListbox 
+// Behandlungsroutinen fé»µ Nachrichten CVideoInformationDlgListbox 
 
 void CVideoInformationDlgListbox::OnRButtonUp(UINT nFlags, CPoint point) 
 {
-	// TODO: Code für die Behandlungsroutine für Nachrichten hier einfügen und/oder Standard aufrufen
+	// TODO: Code fé»µ die Behandlungsroutine fé»µ Nachrichten hier einfé»¦en und/oder Standard aufrufen
 	CMenu*		cmPopupMenu;
 //	int			iIndex;
 	CString		cStr;
@@ -179,7 +179,7 @@ void AddRepair(CHANGEAVIHEADER**	lpcahRepair,DWORD dwSize,__int64 qwFilePos,__in
 
 BOOL CVideoInformationDlgListbox::OnCommand(WPARAM wParam, LPARAM lParam) 
 {
-	// TODO: Speziellen Code hier einfügen und/oder Basisklasse aufrufen
+	// TODO: Speziellen Code hier einfé»¦en und/oder Basisklasse aufrufen
 	DWORD					i,j,dwWritten;
 	CString					cStr1,cStr2;
 	READSUPERINDEXPROTOCOL*	lpRSIP;	
@@ -216,7 +216,7 @@ BOOL CVideoInformationDlgListbox::OnCommand(WPARAM wParam, LPARAM lParam)
 			dwDone|=REPAIRS_ODML;
 			break;
 		case IDM_VILB_REPAIRFRAMERATE:
-			AddRepair(&lpcahCurr,4,avifile->GetAbsolutePositions()->dwMicroSecPerFrame,0,round(avifile->GetMicroSecPerFrame()));
+			AddRepair(&lpcahCurr,4,avifile->GetAbsolutePositions()->dwMicroSecPerFrame,0,avimux_round(avifile->GetMicroSecPerFrame()));
 			dwDone|=REPAIRS_FRAMERATE;
 			break;
 		case IDM_VILB_SAVEAS:
@@ -262,8 +262,8 @@ BOOL CVideoInformationDlgListbox::OnCommand(WPARAM wParam, LPARAM lParam)
 			if (csfrd->DoModal()==IDOK)
 			{
 				csfrd->GetData(&f);
-				dwNNSPF=(DWORD)round(((double)1000000000./f.frate)/100)*100;
-				dwNMSPF=(DWORD)round(((double)dwNNSPF)/1000);
+				dwNNSPF=(DWORD)avimux_round(((double)1000000000./f.frate)/100)*100;
+				dwNMSPF=(DWORD)avimux_round(((double)dwNNSPF)/1000);
 				if (f.den == 0) {
 					AddRepair(&lpcahCurr,4,avifile->GetAbsolutePositions()->dwMicroSecPerFrame,0,dwNMSPF);
 					AddRepair(&lpcahCurr,4,avifile->GetAbsolutePositions()->dwRateSTRH0,0,10000000);

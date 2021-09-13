@@ -1,4 +1,4 @@
-#ifndef I_VIDEOSOURCE_GENERIC
+﻿#ifndef I_VIDEOSOURCE_GENERIC
 #define I_VIDEOSOURCE_GENERIC
 
 #include "../multimedia_source.h"
@@ -9,21 +9,21 @@ const int VS_OK			= 0x01;
 const int VS_ERROR		= -0x01;
 const int VS_INVALIDCALL= -0x02;
 
-typedef struct 
+struct REFERENCE_INFO
 {
 
 	int		iCount;
 	__int64	iThis;
 	__int64	iReferences[256];
-} REFERENCE_INFO;
+} ;
 
-typedef struct
+struct RESOLUTION
 {
 	int		iWidth;
 	int		iHeight;
 
 	RECT	rcCrop;
-} RESOLUTION;
+} ;
 
 class VIDEOSOURCE: public MULTIMEDIASOURCE
 {

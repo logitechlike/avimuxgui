@@ -1,4 +1,4 @@
-#ifndef I_MULTIMEDIASOURCE
+﻿#ifndef I_MULTIMEDIASOURCE
 #define I_MULTIMEDIASOURCE
 
 #include "Compression.h"
@@ -15,7 +15,7 @@ const int MMS_SUBTITLES = 0x03;
 
 const int MMS_UNKNOWN   = -0x7FFFFFFF;
 
-typedef struct
+struct MULTIMEDIASOURCE_INFO
 {
 		__int64				iCurrentTimecode;	// contains timecode of last read frame			
 		__int64				iMaxLength;			// contains maximum length of stream
@@ -28,10 +28,10 @@ typedef struct
 		bool				bDefault;
 		
 		int					iCompression;
-} MULTIMEDIASOURCE_INFO;
+} ;
 
 
-typedef struct
+struct ADVANCEDREAD_INFO
 {
 // duration
 	__int64		iDuration;
@@ -40,14 +40,14 @@ typedef struct
 	int			iFramecount;
 	int*		iFramesizes;
 	int			iFileEnds;
-} ADVANCEDREAD_INFO;
+} ;
 
 
 /* Make up a universal read structure here. This structure
    is supposed to represent one data item that cannot be
    easily split apart, like one mp3 frame or a bunch of
    vorbis frames. */
-typedef struct
+struct MULTIMEDIA_DATA_PACKET
 {
 	/* Start timecode of a packet in nanoseconds */
 	__int64		timecode;
@@ -84,7 +84,7 @@ typedef struct
 		void*		data;
 		char*		cData;
 	};
-} MULTIMEDIA_DATA_PACKET;
+} ;
 
 void createMultimediaDataPacket(MULTIMEDIA_DATA_PACKET** packet);
 void freeMultimediaDataPacket(MULTIMEDIA_DATA_PACKET* packet);

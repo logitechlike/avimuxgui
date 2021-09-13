@@ -1,4 +1,4 @@
-// VideoInformationDlg.cpp: Implementierungsdatei
+ï»¿// VideoInformationDlg.cpp: Implementierungsdatei
 //
 
 #include "stdafx.h"
@@ -49,8 +49,8 @@ CVideoInformationDlg::CVideoInformationDlg(CWnd* pParent /*=NULL*/)
 void CVideoInformationDlg::OnFinalRelease()
 {
 	// Nachdem die letzte Referenz auf ein Automatisierungsobjekt freigegeben wurde,
-	// wird OnFinalRelease aufgerufen. Die Basisklasse löscht das Objekt
-	// automatisch. Fügen Sie zusätzlichen Bereinigungscode für Ihr Objekt
+	// wird OnFinalRelease aufgerufen. Die Basisklasse lé°cht das Objekt
+	// automatisch. Fé»¦en Sie zusé‹žzlichen Bereinigungscode fé»µ Ihr Objekt
 	// hinzu, bevor Sie die Basisklasse aufrufen.
 
 	CResizeableDialog::OnFinalRelease();
@@ -81,12 +81,12 @@ END_MESSAGE_MAP()
 
 BEGIN_DISPATCH_MAP(CVideoInformationDlg, CResizeableDialog)
 	//{{AFX_DISPATCH_MAP(CVideoInformationDlg)
-		// HINWEIS - Der Klassen-Assistent fügt hier Zuordnungsmakros ein und entfernt diese.
+		// HINWEIS - Der Klassen-Assistent fé»¦t hier Zuordnungsmakros ein und entfernt diese.
 	//}}AFX_DISPATCH_MAP
 END_DISPATCH_MAP()
 
-// Hinweis: Wir stellen Unterstützung für IID_IVideoInformationDlg zur Verfügung, um typsicheres Binden
-//  von VBA zu ermöglichen. Diese IID muss mit der GUID übereinstimmen, die in der
+// Hinweis: Wir stellen Untersté»·zung fé»µ IID_IVideoInformationDlg zur Verfé»¦ung, um typsicheres Binden
+//  von VBA zu ermé°ƒlichen. Diese IID muss mit der GUID é»šereinstimmen, die in der
 //  Disp-Schnittstelle in der .ODL-Datei angegeben ist.
 
 // {B0D1411A-21A1-4FB5-BDDC-A6ECF0404B06}
@@ -98,7 +98,7 @@ BEGIN_INTERFACE_MAP(CVideoInformationDlg, CResizeableDialog)
 END_INTERFACE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// Behandlungsroutinen für Nachrichten CVideoInformationDlg 
+// Behandlungsroutinen fé»µ Nachrichten CVideoInformationDlg 
 
 
 #define LBE_DWFOURCC		0x00000001
@@ -669,7 +669,7 @@ bool CVideoInformationDlg::InitDialog_Matroska()
 	x=lpVS->GetNbrOfFrames();
 	dwChunkCount=x;
 	dSeconds=((double)x/(double)framerate1);
-	dwMillisec=(DWORD)(round(1000*double(x)/(double)framerate1)%1000);
+	dwMillisec=(DWORD)(avimux_round(1000*double(x)/(double)framerate1)%1000);
 	sprintf(buffer,"%d:%02d:%02d.%03d",((DWORD)dSeconds/3600),((DWORD)dSeconds%3600)/60,((DWORD)dSeconds%60),dwMillisec);
 	sprintf(lpDest,"%-30s:%10d (%s)",cStr[0].GetBuffer(255),x,buffer);
 	clb->AddString(lpDest);
@@ -845,7 +845,7 @@ BOOL CVideoInformationDlg::OnInitDialog()
 	sprintf(lpDest,"%-23s (avih): %s fps",cStr[0].GetBuffer(255),buffer);
 	clb->AddString(lpDest);
 
-	if (avifile->lpMainAVIHeader->dwMicroSecPerFrame!=round((double)(avifile->GetNanoSecPerFrame())/1000))
+	if (avifile->lpMainAVIHeader->dwMicroSecPerFrame!=avimux_round((double)(avifile->GetNanoSecPerFrame())/1000))
 	{
 		cStr[0]=LoadString(IDS_VI_FRWRITTENBYIDIOT);
 		sprintf(lpDest,"  %s",cStr[0].GetBuffer(255));
@@ -860,7 +860,7 @@ BOOL CVideoInformationDlg::OnInitDialog()
 	x=avifile->GetNbrOfChunks(0);
 	dwChunkCount=x;
 	dSeconds=((double)x/(double)framerate1);
-	dwMillisec=(DWORD)(round(1000*double(x)/(double)framerate1)%1000);
+	dwMillisec=(DWORD)(avimux_round(1000*double(x)/(double)framerate1)%1000);
 	sprintf(buffer,"%d:%02d:%02d.%03d",((DWORD)dSeconds/3600),((DWORD)dSeconds%3600)/60,((DWORD)dSeconds%60),dwMillisec);
 	sprintf(lpDest,"%-30s:%10d (%s)",cStr[0].GetBuffer(255),x,buffer);
 	clb->AddString(lpDest);
@@ -980,10 +980,10 @@ BOOL CVideoInformationDlg::OnInitDialog()
 			cStr[4]=LoadString(STR_BYTES);
 			if ((!IsMP3SampleCount(strf->nBlockAlign))||(strf->wFormatTag!=0x0055))
 			{
-			// nicht (MP3-VBR) => Anzahl an dwSamplesize-großer Blöcke
+			// nicht (MP3-VBR) => Anzahl an dwSamplesize-groér Blé¯¿ke
 				cStr[0]=LoadString(STR_VILB_STREAMSIZE_STRH);
 				QW2Str(strh->dwLength,buffer,16);
-				sprintf(lpDest,"  %-25s: %s units à %d %s",cStr[0],
+				sprintf(lpDest,"  %-25s: %s units ?%d %s",cStr[0],
 					buffer,strh->dwSampleSize,cStr[4].GetBuffer(255));
 				clb->AddString(lpDest);
 
@@ -1016,7 +1016,7 @@ BOOL CVideoInformationDlg::OnInitDialog()
 			QW2Str(strf->nSamplesPerSec,buffer,16);
 			sprintf(lpDest,"  %-25s: %s",cStr[0],buffer);
 			clb->AddString(lpDest);
-	// Kanäle
+	// Kané‹–e
 			cStr[0]=LoadString(IDS_VI_CHANNELS);
 			QW2Str(strf->nChannels,buffer,16);
 			sprintf(lpDest,"  %-25s: %s",cStr[0],buffer);
@@ -1062,7 +1062,7 @@ BOOL CVideoInformationDlg::OnInitDialog()
 
 	if (lpRSIP)
 	{
-	// Info über OpenDML-Index
+	// Info é»šer OpenDML-Index
 		cStr[0]=LoadString(IDS_VI_OPENDMLINDEX);
 		sprintf(lpDest,"%s: ",cStr[0].GetBuffer(255));
 		clb->AddString(lpDest);
@@ -1072,7 +1072,7 @@ BOOL CVideoInformationDlg::OnInitDialog()
 			cStr[0]=LoadString(IDS_VI_STREAM);
 			sprintf(lpDest,"  %s: %d",cStr[0].GetBuffer(255),i);
 			clb->AddString(lpDest);
-		// Anzahl Einträge im Superindex
+		// Anzahl Eintré‹‘e im Superindex
 			cStr[0]=LoadString(IDS_VI_SUPERINDEXENTRIES);
 			sprintf(lpDest,"      %s: %d ",cStr[0].GetBuffer(255),lpRSIP[i].dwEntries);
 			clb->AddString(lpDest);
@@ -1084,7 +1084,7 @@ BOOL CVideoInformationDlg::OnInitDialog()
 			sprintf(lpDest,"                     %-20s    %-20s",cStr[3].GetBuffer(255),cStr[2].GetBuffer(255));
 			clb->AddString(lpDest);
 			clb->AddString("                     ------------------------------------------------");
-		// Einzelne Einträge durchgehen
+		// Einzelne Eintré‹‘e durchgehen
 			for (j=0;j<(int)lpRSIP[i].dwEntries;j++)
 			{
 				QW2Str(lpRSIP[i].rsipEntries[j].dwDurationValue,nbr1,20);
@@ -1103,7 +1103,7 @@ BOOL CVideoInformationDlg::OnInitDialog()
 	sprintf(lpDest,"%s: %d",cStr[0].GetBuffer(255),dwChunkCount);
 	clb->AddString(lpDest);
 
-	// Info über Chunkgrößen
+	// Info é»šer Chunkgré²žen
 	cStr[0]=LoadString(IDS_VILB_CHUNKSIZES);
 	clb->AddString(cStr[0]);
 	for (i=avifile->GetNbrOfStreams()-1;i>=0;i--)
@@ -1150,13 +1150,13 @@ BOOL CVideoInformationDlg::OnInitDialog()
 
 	if (lpFI->dwType&FILETYPE_M2F2) clb->SetUnavailableRepairs(0xFFFFFFFF);
 
-	// TODO: Zusätzliche Initialisierung hier einfügen
+	// TODO: Zusé‹žzliche Initialisierung hier einfé»¦en
 	
 	free(lpDest);
 
 
 	return TRUE;  // return TRUE unless you set the focus to a control
-	              // EXCEPTION: OCX-Eigenschaftenseiten sollten FALSE zurückgeben
+	              // EXCEPTION: OCX-Eigenschaftenseiten sollten FALSE zuré»žkgeben
 }
 
 void CVideoInformationDlg::OnApplyrepairs() 
@@ -1215,7 +1215,7 @@ void CVideoInformationDlg::OnApplyrepairs()
 
 void CVideoInformationDlg::OnOK() 
 {
-	// TODO: Zusätzliche Prüfung hier einfügen
+	// TODO: Zusé‹žzliche Pré»¤ung hier einfé»¦en
 	CVideoInformationDlgListbox*	clb;
 	clb=(CVideoInformationDlgListbox*)GetDlgItem(IDE_VIDEOINFORMATION);
 	clb->ClearRepairs(false);
@@ -1250,7 +1250,7 @@ void CVideoInformationDlg::SetVideoSource(VIDEOSOURCE* _lpVS)
 */
 void CVideoInformationDlg::OnRIFFChunkTree() 
 {
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	CRIFFChunkTreeDlg*	crctd;
 //	CEBMLTreeDlg* cetg;
 
@@ -1278,7 +1278,7 @@ void CVideoInformationDlg::OnRIFFChunkTree()
 BOOL CVideoInformationDlg::OnCommand(WPARAM wParam, LPARAM lParam) 
 {
 	char	Buffer[50];
-	// TODO: Speziellen Code hier einfügen und/oder Basisklasse aufrufen
+	// TODO: Speziellen Code hier einfé»¦en und/oder Basisklasse aufrufen
 	switch (LOWORD(wParam))
 	{
 		case IDM_BUILDRIFFSTATE:
@@ -1293,7 +1293,7 @@ BOOL CVideoInformationDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 
 void CVideoInformationDlg::OnSavetree() 
 {
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 /*	std::auto_ptr<CFileDialog> dlg(new CFileDialog(false, _T("txt"), _T(""), OFN_OVERWRITEPROMPT,
 		NULL));
 */	
@@ -1326,8 +1326,8 @@ void CVideoInformationDlg::OnSavetree()
 
 void CVideoInformationDlg::OnBnClickedOk()
 {
-	// TODO: Fügen Sie hier Ihren Kontrollbehandlungscode für die Benachrichtigung ein.
-	// TODO: Zusätzliche Prüfung hier einfügen
+	// TODO: Fé»¦en Sie hier Ihren Kontrollbehandlungscode fé»µ die Benachrichtigung ein.
+	// TODO: Zusé‹žzliche Pré»¤ung hier einfé»¦en
 	CVideoInformationDlgListbox*	clb;
 	clb=(CVideoInformationDlgListbox*)GetDlgItem(IDE_VIDEOINFORMATION);
 	clb->ClearRepairs(false);

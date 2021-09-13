@@ -1,4 +1,4 @@
-/* The CCache class implements a transparent thread safe cache system
+﻿/* The CCache class implements a transparent thread safe cache system
    that features asnychronous read ahead, asynchronous writeback and
    unbuffered I/O with an underlying CCCFileStream class. However, note
    that thread-safety and asnychronous read-ahead are mutually exclusive.
@@ -779,7 +779,7 @@ bool CCache::LeaveCritical()
 {
 	leave_count++;
 	if (bThreadsafe) {
-		_ASSERT(critical_section.LockCount >= 0);
+		//_ASSERT(critical_section.LockCount >= 0);
 		LeaveCriticalSection(&critical_section);
 	}
 

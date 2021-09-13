@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "strings.h"
 
 // upper case
@@ -6,11 +6,12 @@ char* ucase(char* s,char* d)
 {
 	char* t = d;
 	while (*s) {
-		if (*s >= 'a' && *s <= 'z') *d++ = *s -32; 
-		  else if (*s == (int)'ü') *d++ = 'Ü';
-		  else if (*s == (int)'ö') *d++ = 'Ö';
-		  else if (*s == (int)'a') *d++ = 'Ä';
-		  else if (*s == (int)'ß') { *d++ = 'S'; *d++ = 'S'; } else *d++ = *s;
+    *s = toupper(*s);
+		//if (*s >= 'a' && *s <= 'z') *d++ = *s -32; 
+		//  else if (*s == (int)'?) *d++ = '?;
+		//  else if (*s == (int)'?) *d++ = '?;
+		//  else if (*s == (int)'a') *d++ = '?;
+		//  else if (*s == (int)'?) { *d++ = 'S'; *d++ = 'S'; } else *d++ = *s;
 		s++;
 	}
 	*d = 0;

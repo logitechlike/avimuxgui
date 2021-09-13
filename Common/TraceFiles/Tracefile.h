@@ -1,4 +1,4 @@
-#ifndef I_TRACEFILE
+Ôªø#ifndef I_TRACEFILE
 #define I_TRACEFILE
 
 #include "windows.h"
@@ -352,11 +352,11 @@ public:
 		virtual std::basic_string<TCHAR> operator() (TParam value) const = NULL;
 	};
 
-	/** \brief Standardformatierer f¸r einen Parameter
+	/** \brief Standardformatierer fÈªµ einen Parameter
 	 *
 	 * Dieser Funktor erzeugt eine String-Darstellung des Parameters in folgender
 	 * Formatierung: [IN ]|[OUT]  <name>: <wert>
-	 * F¸r die Ermittlung der Darstellung des Wertes des Objekts kann ein
+	 * FÈªµ die Ermittlung der Darstellung des Wertes des Objekts kann ein
 	 * nutzerdefinierter Funktor angegeben werden.
 	 */
 	template<class TDisplayValueProvider>
@@ -392,10 +392,10 @@ public:
 		}
 	};
 
-	/** \brief Standardformatierer f¸r einen Wert.
+	/** \brief Standardformatierer fÈªµ einen Wert.
 	 *
 	 * Dieser Funktor erzeugt eine String-Darstellung eines Objekts, indem es es
-	 * in einen basic_ostringstream einf¸gt. Er kann f¸r alle einfachen Datentypen
+	 * in einen basic_ostringstream einfÈª¶t. Er kann fÈªµ alle einfachen Datentypen
 	 * verwendet werden.
 	 */
 	struct default_display_value_provider: display_value_provider_base
@@ -444,8 +444,8 @@ public:
  * \param TDisplayValueProvider Typ des Funktors, der aus dem zu formatierenden
  * Objekt eine String-Darstellung des Wertes generiert
  *
- * Diese Klasse repr‰sentiert formatiert darstellbare Parameter, die in 
- * ENTER- oder LEAVE-Eintr‰gen im Log ausgegeben werden kˆnnen. Die
+ * Diese Klasse reprÈãùentiert formatiert darstellbare Parameter, die in 
+ * ENTER- oder LEAVE-EintrÈãëen im Log ausgegeben werden kÈ∞änen. Die
  * Formatierung der Ausgabe kann durch Angabe geeigneter Funktoren konfiguriert
  * werden.
  */
@@ -544,25 +544,25 @@ public:
 		return CTraceableParam<T, typename CTraceableParamBase<T>::default_formatter<typename U>, typename U>(true, false, s_inStr.TStr(), name, value, displayValueGetter);
 	}
 
-	template<class T>
-	static CTraceableParam<T*, typename CTraceableParamBase<T*>::default_formatter<typename CTraceableParamBase<T*>::default_display_value_provider>, typename CTraceableParamBase<T*>::default_display_value_provider> GetOut(const std::basic_string<TCHAR>& name, T* value) {
-		return CTraceableParam<T*, typename CTraceableParamBase<T*>::default_formatter<typename CTraceableParamBase<T*>::default_display_value_provider>, typename CTraceableParamBase<T*>::default_display_value_provider>(false, true, s_outStr.TStr(), name, value);
-	}
+	//template<class T>
+	//static CTraceableParam<T*, typename CTraceableParamBase< T* >::default_formatter<typename CTraceableParamBase< T* >::default_display_value_provider>, typename CTraceableParamBase< T* >::default_display_value_provider> GetOut(const std::basic_string<TCHAR>& name, T* value) {
+	//	return CTraceableParam<T*, typename CTraceableParamBase< T* >::default_formatter<typename CTraceableParamBase< T* >::default_display_value_provider>, typename CTraceableParamBase< T* >::default_display_value_provider>(false, true, s_outStr.TStr(), name, value);
+	//}
 
-	template<class T>
-	static CTraceableParam<T*, typename CTraceableParamBase<T*>::default_formatter<typename CTraceableParamBase<T*>::default_ptr_display_value_provider>, typename CTraceableParamBase<T*>::default_ptr_display_value_provider> GetOutPtr(const std::basic_string<TCHAR>& name, T* value) {
-		return CTraceableParam<T*, typename CTraceableParamBase<T*>::default_formatter<typename CTraceableParamBase<T*>::default_ptr_display_value_provider>, typename CTraceableParamBase<T*>::default_ptr_display_value_provider>(false, true, s_outStr.TStr(), name, value);
-	}
+	//template<class T>
+	//static CTraceableParam<T*, typename CTraceableParamBase<T*>::default_formatter<typename CTraceableParamBase<T*>::default_ptr_display_value_provider>, typename CTraceableParamBase<T*>::default_ptr_display_value_provider> GetOutPtr(const std::basic_string<TCHAR>& name, T* value) {
+	//	return CTraceableParam<T*, typename CTraceableParamBase<T*>::default_formatter<typename CTraceableParamBase<T*>::default_ptr_display_value_provider>, typename CTraceableParamBase<T*>::default_ptr_display_value_provider>(false, true, s_outStr.TStr(), name, value);
+	//}
 
-	template<class T, class U>
-	static CTraceableParam<T*, typename CTraceableParamBase<T*>::default_formatter<typename U>, typename U> GetOut(const std::basic_string<TCHAR>& name, T* value, U displayValueGetter) {
-		return CTraceableParam<T*, typename CTraceableParamBase<T*>::default_formatter<typename U>, typename U>(false, true, _T("[OUT]"), name, value, displayValueGetter);
-	}
+	//template<class T, class U>
+	//static CTraceableParam<T*, typename CTraceableParamBase<T*>::default_formatter<typename U>, typename U> GetOut(const std::basic_string<TCHAR>& name, T* value, U displayValueGetter) {
+	//	return CTraceableParam<T*, typename CTraceableParamBase<T*>::default_formatter<typename U>, typename U>(false, true, _T("[OUT]"), name, value, displayValueGetter);
+	//}
 
-	template<class T, class U>
-	static CTraceableParam<T*, typename CTraceableParamBase<T*>::default_formatter<typename U>, typename U> GetInOut(const std::basic_string<TCHAR>& name, T* value, U displayValueGetter) {
-		return CTraceableParam<T*, typename CTraceableParamBase<T*>::default_formatter<typename U>, typename U>(true, true, _T("[IN/OUT]"), name, value, displayValueGetter);
-	}
+	//template<class T, class U>
+	//static CTraceableParam<T*, typename CTraceableParamBase<T*>::default_formatter<typename U>, typename U> GetInOut(const std::basic_string<TCHAR>& name, T* value, U displayValueGetter) {
+	//	return CTraceableParam<T*, typename CTraceableParamBase<T*>::default_formatter<typename U>, typename U>(true, true, _T("[IN/OUT]"), name, value, displayValueGetter);
+	//}
 };
 
 class CLocalTracer

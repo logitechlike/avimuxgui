@@ -1,4 +1,4 @@
-#ifndef I_AVISTRUCTS
+﻿#ifndef I_AVISTRUCTS
 #define I_AVISTRUCTS
 
 // stuff from vfw/mmreg
@@ -11,21 +11,45 @@
 
 #pragma pack(push, 1)
 
+//#ifndef _WAVEFORMATEX_
+//#define _WAVEFORMATEX_
+//struct tWAVEFORMATEX
+//{
+//    WORD    wFormatTag;        /* format type */
+//    WORD    nChannels;         /* number of channels (i.e. mono, stereo...) */
+//    DWORD   nSamplesPerSec;    /* sample rate */
+//    DWORD   nAvgBytesPerSec;   /* for buffer estimation */
+//    WORD    nBlockAlign;       /* block size of data */
+//    WORD    wBitsPerSample;    /* Number of bits per sample of mono data */
+//    WORD    cbSize;            /* The count in bytes of the size of
+//                                    extra information (after cbSize) */
+//
+//};
+//struct tWAVEFORMATEX WAVEFORMATEX;
+//#endif
+/* general extended waveform format structure
+   Use this for all NON PCM formats
+   (information common to all formats)
+*/
 #ifndef _WAVEFORMATEX_
 #define _WAVEFORMATEX_
 typedef struct tWAVEFORMATEX
 {
-    WORD    wFormatTag;        /* format type */
-    WORD    nChannels;         /* number of channels (i.e. mono, stereo...) */
-    DWORD   nSamplesPerSec;    /* sample rate */
-    DWORD   nAvgBytesPerSec;   /* for buffer estimation */
-    WORD    nBlockAlign;       /* block size of data */
-    WORD    wBitsPerSample;    /* Number of bits per sample of mono data */
-    WORD    cbSize;            /* The count in bytes of the size of
-                                    extra information (after cbSize) */
+  WORD    wFormatTag;        /* format type */
+  WORD    nChannels;         /* number of channels (i.e. mono, stereo...) */
+  DWORD   nSamplesPerSec;    /* sample rate */
+  DWORD   nAvgBytesPerSec;   /* for buffer estimation */
+  WORD    nBlockAlign;       /* block size of data */
+  WORD    wBitsPerSample;    /* Number of bits per sample of mono data */
+  WORD    cbSize;            /* The count in bytes of the size of
+                                  extra information (after cbSize) */
 
 } WAVEFORMATEX;
-#endif
+typedef WAVEFORMATEX       *PWAVEFORMATEX;
+typedef WAVEFORMATEX NEAR *NPWAVEFORMATEX;
+typedef WAVEFORMATEX FAR  *LPWAVEFORMATEX;
+#endif /* _WAVEFORMATEX_ */
+
 
 #define AVIF_HASINDEX		0x00000010	// Index at end of file?
 #define AVIF_MUSTUSEINDEX	0x00000020
@@ -35,7 +59,7 @@ typedef struct tWAVEFORMATEX
 
 #define AVI_HEADERSIZE  2048                    // size of AVI header list
 
-typedef struct
+struct MainAVIHeader
 {
     DWORD		dwMicroSecPerFrame;	// frame display rate (or 0L)
     DWORD		dwMaxBytesPerSec;	// max. transfer rate
@@ -51,7 +75,7 @@ typedef struct
     DWORD		dwHeight;
 
     DWORD		dwReserved[4];
-} MainAVIHeader;
+} ;
 
 
 /*
@@ -63,7 +87,8 @@ typedef struct
 #define AVISF_VIDEO_PALCHANGES		0x00010000
 #define FOURCC DWORD
 
-typedef struct {
+struct AVIStreamHeader 
+{
     FOURCC		fccType;
     FOURCC		fccHandler;
     DWORD		dwFlags;	/* Contains AVITF_* flags */
@@ -78,7 +103,7 @@ typedef struct {
     DWORD		dwQuality;
     DWORD		dwSampleSize;
     RECT		rcFrame;
-} AVIStreamHeader;
+} ;
 
 /* Flags for index */
 #define AVIIF_LIST          0x00000001L // chunk is a 'LIST'
@@ -90,30 +115,34 @@ typedef struct {
 #define AVIIF_NOTIME	    0x00000100L // this frame doesn't take any time
 #define AVIIF_COMPUSE       0x0FFF0000L // these bits are for compressor use
 
-typedef struct
+struct AVIINDEXENTRY
 {
     DWORD		ckid;
     DWORD		dwFlags;
     DWORD		dwChunkOffset;		// Position of chunk
     DWORD		dwChunkLength;		// Length of chunk
-} AVIINDEXENTRY;
+} ;
 
 #define MPEGLAYER3_WFX_EXTRA_BYTES   12
 
 // WAVE_FORMAT_MPEGLAYER3 format sructure
 //
 
-typedef struct mpeglayer3waveformat_tag {
+struct MPEGLAYER3WAVEFORMAT {
   WAVEFORMATEX  wfx;
   WORD          wID;
   DWORD         fdwFlags;
   WORD          nBlockSize;
   WORD          nFramesPerBlock;
   WORD          nCodecDelay;
-} MPEGLAYER3WAVEFORMAT;
+};
+//struct mpeglayer3waveformat_tag MPEGLAYER3WAVEFORMAT;
+typedef struct MPEGLAYER3WAVEFORMAT          *PMPEGLAYER3WAVEFORMAT;
+typedef struct MPEGLAYER3WAVEFORMAT NEAR    *NPMPEGLAYER3WAVEFORMAT;
+typedef struct MPEGLAYER3WAVEFORMAT FAR     *LPMPEGLAYER3WAVEFORMAT;
 
 /*  MPEG-1 audio wave format (audio layer only).   (0x0050)   */
-typedef struct mpeg1waveformat_tag {
+struct MPEG1WAVEFORMAT {
     WAVEFORMATEX    wfx;
     WORD            fwHeadLayer;
     DWORD           dwHeadBitrate;
@@ -123,10 +152,14 @@ typedef struct mpeg1waveformat_tag {
     WORD            fwHeadFlags;
     DWORD           dwPTSLow;
     DWORD           dwPTSHigh;
-} MPEG1WAVEFORMAT;
-typedef MPEG1WAVEFORMAT                 *PMPEG1WAVEFORMAT;
-typedef MPEG1WAVEFORMAT NEAR           *NPMPEG1WAVEFORMAT;
-typedef MPEG1WAVEFORMAT FAR            *LPMPEG1WAVEFORMAT;
+};
+//struct mpeg1waveformat_tag MPEG1WAVEFORMAT;
+
+typedef struct MPEG1WAVEFORMAT                 *PMPEG1WAVEFORMAT;
+typedef struct MPEG1WAVEFORMAT NEAR           *NPMPEG1WAVEFORMAT;
+typedef struct MPEG1WAVEFORMAT FAR            *LPMPEG1WAVEFORMAT;
+
+
 
 #define ACM_MPEG_LAYER1             (0x0001)
 #define ACM_MPEG_LAYER2             (0x0002)

@@ -1329,7 +1329,7 @@ int MuxThread_AVI(DEST_AVI_INFO* lpDAI)
 				{
 					// delay < 0 => remove beginning of stream
 					lpDAI->asi[i]->audiosource->Read(lpBuffer,20000,&dwMicroSecRead,NULL);
-					iDelay+=(int)round(dwMicroSecRead/1000);
+					iDelay+=(int)avimux_round(dwMicroSecRead/1000);
 				}
 			}
 			else
@@ -1368,7 +1368,7 @@ int MuxThread_AVI(DEST_AVI_INFO* lpDAI)
 					dwFlags=AVIIF_KEYFRAME;
 					AVIOut->AddChunk(i+1,&lpBuffer,iSize,dwFlags);
 					if (!lpBuffer) lpBuffer=malloc(1<<22);
-					iDelay-=(int)round(dwMicroSecRead/1000);
+					iDelay-=(int)avimux_round(dwMicroSecRead/1000);
 
 					AddAudioSize(qwStats,iSize);
 					AddOverhead(qwStats,overhead_per_chunk);

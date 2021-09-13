@@ -1,0 +1,25 @@
+
+# liu_job1234@163.com
+
+#### windows
+
+*.vcxproj.use
+*.opensdf
+*.opendb
+*.sdf
+*.suo
+*.user
+*.zip
+*.ncb
+*.obj
+*.ipch
+*.sln
+*.VC.db
+*.vs
+*.aps
+
+
+Debug
+ipch
+Release
+

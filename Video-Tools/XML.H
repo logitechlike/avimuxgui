@@ -1,4 +1,4 @@
-#ifndef I_XML
+﻿#ifndef I_XML
 #define I_XML
 
 #include <vector>
@@ -7,13 +7,13 @@ const int XMLERR_BADTAGNAME = -1;
 const int XMLERR_TAGEXPECTED= -2;
 const int XMLERR_OK         = 1;
 
-typedef struct
+struct XMLNODEATTRIBUTE
 {
 	char name[1024];
 	char value[1024];
-} XMLNODEATTRIBUTE;
+};
 
-typedef std::vector<XMLNODEATTRIBUTE> XMLNODEATTRIBUTES;
+typedef std::vector< XMLNODEATTRIBUTE > XMLNODEATTRIBUTES;
 
 class XMLNODE 
 {
@@ -48,18 +48,18 @@ void		xmlDeleteSimpleNode(XMLNODE** ppNode);
 int			xmlBuildTree(XMLNODE** pDest, char* cSourceText);
 void		xmlRemoveNext(XMLNODE* pDest);
 
-typedef struct
+struct TOPO_SORT_ENTRY
 {
 	int		used;
 	char*	cName1;
 	char*   cName2;
-} TOPO_SORT_ENTRY;
+};
 
-typedef struct
+struct TOPO_SORT_LIST
 {
 	int					iCount;
 	TOPO_SORT_ENTRY**	entries;
-} TOPO_SORT_LIST;
+} ;
 
 int			xmlTopoSort(XMLNODE* pSource, XMLNODE** pDest, TOPO_SORT_LIST* pTSL);
 

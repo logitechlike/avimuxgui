@@ -1,4 +1,4 @@
-#if !defined(AFX_SPLITPOINTLIST_H__ADFFF899_7C08_4A68_97B3_2406F8DFD8E5__INCLUDED_)
+ï»¿#if !defined(AFX_SPLITPOINTLIST_H__ADFFF899_7C08_4A68_97B3_2406F8DFD8E5__INCLUDED_)
 #define AFX_SPLITPOINTLIST_H__ADFFF899_7C08_4A68_97B3_2406F8DFD8E5__INCLUDED_
 
 #if _MSC_VER > 1000
@@ -13,13 +13,13 @@
 #include "AVIFile.h"
 #include "videosource.h"
 
-typedef struct
+struct SPLIT_POINT
 {
 	int		iFlags;
 	__int64 iBegin;
 	__int64 iEnd;
 
-} SPLIT_POINT;
+} ;
 
 class CSplitPointList : public CListBox
 {
@@ -39,8 +39,8 @@ public:
 // Operationen
 public:
 
-// Überschreibungen
-	// Vom Klassen-Assistenten generierte virtuelle Funktionsüberschreibungen
+// èº¡erschreibungen
+	// Vom Klassen-Assistenten generierte virtuelle Funktionsé»šerschreibungen
 	//{{AFX_VIRTUAL(CSplitPointList)
 	public:
 	virtual void OnFinalRelease();
@@ -63,7 +63,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 	// Generierte OLE-Dispatch-Zuordnungsfunktionen
 	//{{AFX_DISPATCH(CSplitPointList)
-		// HINWEIS - Der Klassen-Assistent fügt hier Member-Funktionen ein und entfernt diese.
+		// HINWEIS - Der Klassen-Assistent fé»¦t hier Member-Funktionen ein und entfernt diese.
 	//}}AFX_DISPATCH
 	DECLARE_DISPATCH_MAP()
 	DECLARE_INTERFACE_MAP()
@@ -72,6 +72,6 @@ protected:
 /////////////////////////////////////////////////////////////////////////////
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ fügt unmittelbar vor der vorhergehenden Zeile zusätzliche Deklarationen ein.
+// Microsoft Visual C++ fé»¦t unmittelbar vor der vorhergehenden Zeile zusé‹žzliche Deklarationen ein.
 
 #endif // AFX_SPLITPOINTLIST_H__ADFFF899_7C08_4A68_97B3_2406F8DFD8E5__INCLUDED_

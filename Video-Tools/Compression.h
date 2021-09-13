@@ -1,4 +1,4 @@
-#ifndef I_COMPRESSION
+﻿#ifndef I_COMPRESSION
 #define I_COMPRESSION
 
 #include <vector>
@@ -59,7 +59,8 @@ public:
 	   frames */
 	int			compressed_elements;
 };
-typedef std::vector<TRACK_COMPRESSION_DESCRIPTOR> TRACK_COMPRESSION;
+
+typedef std::vector< TRACK_COMPRESSION_DESCRIPTOR > TRACK_COMPRESSION;
 
 #define CCompressionInfo TRACK_COMPRESSION_DESCRIPTOR
 

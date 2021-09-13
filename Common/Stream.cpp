@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Stream.h"
 
 #ifdef DEBUG_NEW
@@ -10,27 +10,32 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 
-
+struct AVIMUX_QWORD
+{
+  long	lLo;
+  long    lHi;
+};
+struct AVIMUX_QWORD *LPAVIMUX_QWORD;
 
 bool SetFilePointer64 (HANDLE hFile, __int64 qwPos)
 {
-	SetFilePointer(hFile,((QWORD*)&qwPos)->lLo,&(((QWORD*)&qwPos)->lHi),FILE_BEGIN);
+	SetFilePointer(hFile,((AVIMUX_QWORD*)&qwPos)->lLo,&(((AVIMUX_QWORD*)&qwPos)->lHi),FILE_BEGIN);
 	return true;
 }
 
 bool GetFilePointer64 (HANDLE hFile,__int64* qwPos)
 {
 	*qwPos=0;
-	((QWORD*)qwPos)->lLo=SetFilePointer(hFile,0,&(((QWORD*)qwPos)->lHi),FILE_CURRENT);
+	((AVIMUX_QWORD*)qwPos)->lLo=SetFilePointer(hFile,0,&(((AVIMUX_QWORD*)qwPos)->lHi),FILE_CURRENT);
 	return true;
 }
 
 bool GetFileSize64 (HANDLE hFile,__int64* qwSize)
 {
 	*qwSize=0;
-	((QWORD*)qwSize)->lLo=GetFileSize(hFile,(DWORD*)&(((QWORD*)qwSize)->lHi));
+	((AVIMUX_QWORD*)qwSize)->lLo=GetFileSize(hFile,(DWORD*)&(((AVIMUX_QWORD*)qwSize)->lHi));
 
-    if (((QWORD*)qwSize)->lLo == INVALID_FILE_SIZE)
+    if (((AVIMUX_QWORD*)qwSize)->lLo == INVALID_FILE_SIZE)
 		*qwSize = 0;
 
 	return true;

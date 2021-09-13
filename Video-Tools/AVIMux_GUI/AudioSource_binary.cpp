@@ -306,11 +306,11 @@ int CBRAUDIOSOURCE::doRead(void* lpDest,DWORD dwMicroSecDesired,DWORD* lpdwMicro
 	dwBytes=GetSource()->Read(lpDest,dwBytes);
 	if (lpdwMicroSecRead) 
 	{
-		*lpdwMicroSecRead=(DWORD)round(1000000*d_div(dwBytes,GetAvgBytesPerSec(),"CBRAUDIOSOURCE::Read: GetAvgBytesPerSec()"));
+		*lpdwMicroSecRead=(DWORD)avimux_round(1000000*d_div(dwBytes,GetAvgBytesPerSec(),"CBRAUDIOSOURCE::Read: GetAvgBytesPerSec()"));
 	}
 	if (lpqwNanoSecRead) 
 	{
-		*lpqwNanoSecRead=round(1000000000*d_div(dwBytes,GetAvgBytesPerSec(),"CBRAUDIOSOURCE::Read: GetAvgBytesPerSec()"));
+		*lpqwNanoSecRead=avimux_round(1000000000*d_div(dwBytes,GetAvgBytesPerSec(),"CBRAUDIOSOURCE::Read: GetAvgBytesPerSec()"));
 	}
 
 	return dwBytes;

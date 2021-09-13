@@ -1,4 +1,4 @@
-#ifndef I_BUFFER
+﻿#ifndef I_BUFFER
 #define I_BUFFER
 
 #include "basestreams.h"
@@ -96,7 +96,7 @@ const int FATTR_ADDATTR_CREATE = 0x00;
 const int FATTR_ADDATTR_DONTCREATE = 0x01;
 
 
-typedef struct ATTRIBUTE_ENTRY
+struct ATTRIBUTE_ENTRY
 {
 	union {
 		void*		pData;
@@ -105,7 +105,7 @@ typedef struct ATTRIBUTE_ENTRY
 	int	   iType;
 	int    iFlags;
 	struct ATTRIBUTE_ENTRY* pNext;
-} ATTRIBUTE_ENTRY;
+} ;
 
 class CAttribs
 {

@@ -25,7 +25,7 @@ VIDEOSOURCE::~VIDEOSOURCE(void)
 
 DWORD VIDEOSOURCE::GetMicroSecPerFrame(void)
 {
-	return (DWORD)round((double)GetNanoSecPerFrame()/1000);
+	return (DWORD)avimux_round((double)GetNanoSecPerFrame()/1000);
 }
 
 __int64 VIDEOSOURCE::GetNanoSecPerFrame(void)

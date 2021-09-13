@@ -1,4 +1,4 @@
-/* Disclaimer:
+Ôªø/* Disclaimer:
 
    Recently someone tried to understand the code in this file, and asked
    me one question after another, why I did certain things the way I did
@@ -147,13 +147,13 @@ DWORD AVIFILEEX::Open(STREAM* lpStream, DWORD Access, DWORD dwAVIType)
 
 			if (hDebugFile==INVALID_HANDLE_VALUE)
 			{
-/*				wsprintf(Buffer, "Datei %s konnte nicht geˆffnet werden",
+/*				wsprintf(Buffer, "Datei %s konnte nicht geÈ∞Çfnet werden",
 					Buffer);
 				MessageBox(0,Buffer,"Fehler",MB_OK); */
 				SetDebugState(DS_DEACTIVATE);
 			}
 		}
-		DebugMsg("Datei geˆffnet (read-only)");
+		DebugMsg("Datei geÈ∞Çfnet (read-only)");
 
 		if (dwAVIType==AT_AUTODETECT) 
 		{
@@ -176,12 +176,12 @@ DWORD AVIFILEEX::Open(STREAM* lpStream, DWORD Access, DWORD dwAVIType)
 		}
 
 		if (!CheckIndxCount())
-	//		DebugMsg ("Anzahl an indx-Chunks ist ung¸ltig! Datei wird als Standard-AVI behandelt");
+	//		DebugMsg ("Anzahl an indx-Chunks ist ungÈªÆtig! Datei wird als Standard-AVI behandelt");
 			atType=AT_STANDARD;
 		
 		/*else
 		{
-			DebugMsg("Anzahl an indx-Chunks ist g¸ltig");
+			DebugMsg("Anzahl an indx-Chunks ist gÈªÆtig");
 		}*/
 	
 		if (!LocateData(MakeFourCC("movi"),NULL,NULL,&lhListHdr,1000000,DT_LIST))
@@ -308,7 +308,7 @@ DWORD AVIFILEEX::Open(STREAM* lpStream, DWORD Access, DWORD dwAVIType)
 				lpwfe->wBitsPerSample=16;
 				lpwfe->nBlockAlign=lpwfe->nChannels*(lpwfe->wBitsPerSample/8);
 				lpwfe->nAvgBytesPerSec=lpwfe->nSamplesPerSec*lpwfe->nBlockAlign;
-/*				wsprintf(Buffer,"Audiostr. %d: ID: 0x%x, %d Samples/s, %d Kan‰le, %d Bit, %d Bytes/s, Blockalign: %d Bytes, %d komp. Bytes/s",
+/*				wsprintf(Buffer,"Audiostr. %d: ID: 0x%x, %d Samples/s, %d KanÈãñe, %d Bit, %d Bytes/s, Blockalign: %d Bytes, %d komp. Bytes/s",
 					i,lpwfeIn->wFormatTag,lpwfeIn->nSamplesPerSec,lpwfeIn->nChannels,lpwfe->wBitsPerSample,lpwfe->nAvgBytesPerSec,lpwfeIn->nBlockAlign,
 					lpwfeIn->nAvgBytesPerSec);
 				DebugMsg(Buffer); */
@@ -323,7 +323,7 @@ DWORD AVIFILEEX::Open(STREAM* lpStream, DWORD Access, DWORD dwAVIType)
 			}
 		}
 *///		hic=NULL;
-	//	DebugMsg ("Videohandler geˆffnet");
+	//	DebugMsg ("Videohandler geÈ∞Çfnet");
 		strfVideo=(BITMAPINFOHEADER*)siStreams[0].lpFormat;
 		ZeroMemory(&bmi24bpp,sizeof(bmi24bpp));
 		bmi24bpp.biSize=sizeof(BITMAPINFOHEADER);
@@ -369,7 +369,7 @@ DWORD AVIFILEEX::Open(STREAM* lpStream, DWORD Access, DWORD dwAVIType)
 			hDebugFile=CreateFile(Buffer,GENERIC_WRITE,FILE_SHARE_READ,NULL,CREATE_ALWAYS,0,NULL);
 			if (!hDebugFile)
 			{
-				wsprintf(Buffer, "Datei %s konnte nicht geˆffnet werden",
+				wsprintf(Buffer, "Datei %s konnte nicht geÈ∞Çfnet werden",
 					Buffer);
 				MessageBox(0,Buffer,"Fehler",MB_OK);
 				SetDebugState(DS_DEACTIVATE);
@@ -409,7 +409,7 @@ DWORD AVIFILEEX::Open(STREAM* lpStream, DWORD Access, DWORD dwAVIType)
 			LastIndex=Index;
 		}
 
-//		SuperIndex wird erst beim Schlieﬂen der RIFF-AVI begonnen!
+//		SuperIndex wird erst beim SchlieÈÅùn der RIFF-AVI begonnen!
 		SetPadding(2);
 		free(Buffer);
 		SetMaxRIFFAVISize(1000*(1<<20));
@@ -641,7 +641,7 @@ bool AVIFILEEX::Close(bool bCloseSource)
 					lpwfe=((WAVEFORMATEX*)siStreams[i].lpFormat);
 					if (!(lpwfe->nAvgBytesPerSec))
 					{
-						lpwfe->nAvgBytesPerSec=(DWORD)round(d_div((double)siStreams[i].qwStreamLength,
+						lpwfe->nAvgBytesPerSec=(DWORD)avimux_round(d_div((double)siStreams[i].qwStreamLength,
 							dPlaytime,"AVIFILEEX::Close()::dPlaytime"));
 					}
 					if (lpwfe->wFormatTag==0x55 || lpwfe->wFormatTag==0x50)
@@ -785,7 +785,7 @@ bool AVIFILEEX::Close(bool bCloseSource)
 		}
 		else
 		{
-		// OpenDML-Datei schlieﬂen
+		// OpenDML-Datei schlieÈÅùn
 			if (qwRIFFStart) 
 			{
 				EndRIFFAVIX();
@@ -828,7 +828,7 @@ bool AVIFILEEX::Close(bool bCloseSource)
 				if (IsAudioStream(i))
 				{
 					lpwfe=((WAVEFORMATEX*)siStreams[i].lpFormat);
-					if (!(lpwfe->nAvgBytesPerSec)) lpwfe->nAvgBytesPerSec=(DWORD)round(d_div((double)siStreams[i].qwStreamLength,dPlaytime,
+					if (!(lpwfe->nAvgBytesPerSec)) lpwfe->nAvgBytesPerSec=(DWORD)avimux_round(d_div((double)siStreams[i].qwStreamLength,dPlaytime,
 						"AVIFILEEX::Close()::dPlayTime"));
 
 					if (lpwfe->wFormatTag==0x55 || lpwfe->wFormatTag == 0x50)
@@ -1099,7 +1099,7 @@ bool AVIFILEEX::ProcessHDRL(char* lpBuffer,DWORD dwLength)
 	lpBuffer+=even(chChunkHdr.dwLength);
 
 	ZeroMemory(Buffer,sizeof(Buffer));
-	sprintf(Buffer,"Streams: %d  µspf: %d  Frames in RIFF-AVI: %d",GetNbrOfStreams(),
+	sprintf(Buffer,"Streams: %d  Á•çpf: %d  Frames in RIFF-AVI: %d",GetNbrOfStreams(),
 		GetMicroSecPerFrame(),lpMainAVIHeader->dwTotalFrames);
 	DebugMsg(Buffer);
 
@@ -1718,7 +1718,7 @@ bool AVIFILEEX::ProcessBaseIndx(_aviindex_chunk* lpIndx, DWORD dwProcessMode,voi
 					}
 				}
 				break;
-			case AVI_INDEX_IS_DATA: break; // time-code etc. nicht unterst¸tzt !
+			case AVI_INDEX_IS_DATA: break; // time-code etc. nicht unterstÈª∑zt !
 			default:
 				return false;
 		}
@@ -1762,7 +1762,7 @@ DWORD AVIFILEEX::GetFrameCount(void)
 
 DWORD AVIFILEEX::GetMicroSecPerFrame(void)
 {
-	return (DWORD)round((double)GetNanoSecPerFrame()/1000);
+	return (DWORD)avimux_round((double)GetNanoSecPerFrame()/1000);
 }
 
 __int64 AVIFILEEX::GetNanoSecPerFrame(void)
@@ -1776,7 +1776,7 @@ __int64 AVIFILEEX::GetNanoSecPerFrame(void)
 	else
 	if (siStreams)
 	{
-		qwOrgNSPF=round(1000000000/d_div((double)siStreams[0].lpHeader->dwRate,(double)siStreams[0].lpHeader->dwScale,
+		qwOrgNSPF=avimux_round(1000000000/d_div((double)siStreams[0].lpHeader->dwRate,(double)siStreams[0].lpHeader->dwScale,
 			"AVIFILEEX::GetNanoSecPerFrame::siStreams[0].lpHeader->dwScale"));//((double)siStreams[0].lpHeader->dwRate/(double)siStreams[0].lpHeader->dwScale));
 	}
 	else
@@ -1852,7 +1852,7 @@ bool AVIFILEEX::DecompressEndVideo(void)
 	return (SUCCEEDED(ICDecompressEnd(hic)));
 }
 */
-// L‰dt Videochunk OHNE TranslateChunkNumber auszurufen!
+// LÈãét Videochunk OHNE TranslateChunkNumber auszurufen!
 int AVIFILEEX::LoadVideoChunk(DWORD dwChunkNbr,DWORD* lpdwSize)
 {
 	void*		lpBuffer;
@@ -1902,7 +1902,7 @@ int AVIFILEEX::LoadVideoChunk(DWORD dwChunkNbr,DWORD* lpdwSize)
 	//switch (FrameType=siStreams[0].ciChunks[dwChunkNbr].ftFrameType)
 	switch (FrameType = chunk.ftFrameType) {
 		case FT_DROPPEDFRAME: 
-			DebugMsg ("  -> enth‰lt keine Daten"); 
+			DebugMsg ("  -> enthÈãñt keine Daten"); 
 			break;
 		case FT_DELTAFRAME:
 			DebugMsg ("  -> ist Deltaframe");
@@ -1923,14 +1923,14 @@ int AVIFILEEX::LoadVideoChunk(DWORD dwChunkNbr,DWORD* lpdwSize)
 			dwFrameCachePos%=FrameCacheSize;
 			dwFlags=(FrameType==FT_DELTAFRAME)?ICDECOMPRESS_NOTKEYFRAME:0;
 			if (fDest->IsExternalBuffer()) fDest->UseInternalBuffer();
-			if (!(fDest->GetBuffer(0))) DebugMsg("  Outputbuffer ung¸ltig");
+			if (!(fDest->GetBuffer(0))) DebugMsg("  Outputbuffer ungÈªÆtig");
 			fiFrame=((FRAMEINFO*)fDest->GetUserData(sizeof(FRAMEINFO)));
 			fiFrame->dwAccCount=0;
 			DebugMsg ("  versuche zu dekomprimieren...");
 			bResult=(!FAILED(ICDecompress(hic,dwFlags,lpbiIn,lpBuffer,lpbiOut,fDest->GetBuffer(0))));
 			switch (bResult)
 			{
-				// Wenn das hier nicht mehr ausgef¸hrt wurde, gabs einen
+				// Wenn das hier nicht mehr ausgefÈª®rt wurde, gabs einen
 				// Ausnahmefehler bei ICDecompress....
 				case true: 
 					DebugMsg("  Dekompression erfolgreich");	
@@ -2003,7 +2003,7 @@ int AVIFILEEX::GetVideoChunk(DWORD dwChunkNbr,void* lpDest,DWORD* lpdwSize)
 
 	if (dwChunkNbr==CN_NEXT_CHUNK)
 	{
-		DebugMsg("n‰chste Frame...");
+		DebugMsg("nÈãçhste Frame...");
 		return GetVideoChunk(siStreams[dwStream].dwPos++,lpDest,lpdwSize);
 	}
 
@@ -2717,7 +2717,7 @@ int AVIFILEEX::SetNanoSecPerFrame(__int64 _qwNSPF)
 	if (dwAccess!=FA_WRITE) return AFE_INVALIDCALL;
 	if (!_qwNSPF) return AFE_INVALIDPARAM;
 
-	lpMainAVIHeader->dwMicroSecPerFrame=(DWORD)round((double)_qwNSPF/1000);
+	lpMainAVIHeader->dwMicroSecPerFrame=(DWORD)avimux_round((double)_qwNSPF/1000);
 	qwNSPF=_qwNSPF;
 
 	return AFE_OK;
@@ -3016,7 +3016,7 @@ int AVIFILEEX::FinishStream(DWORD dwStreamNbr,__int64 qwMicroSec)
 
 	if (lpwfe && lpwfe->nAvgBytesPerSec) return AFE_INVALIDCALL;
 
-	if (IsAudioStream(dwStreamNbr)) lpwfe->nAvgBytesPerSec=(DWORD)round((double)siStreams[dwStreamNbr].qwStreamLength*1000000/(double)qwMicroSec);
+	if (IsAudioStream(dwStreamNbr)) lpwfe->nAvgBytesPerSec=(DWORD)avimux_round((double)siStreams[dwStreamNbr].qwStreamLength*1000000/(double)qwMicroSec);
 	if (IsTextStream(dwStreamNbr)) siStreams[dwStreamNbr].qwStreamLength=qwMicroSec;
 	return AFE_OK;
 }

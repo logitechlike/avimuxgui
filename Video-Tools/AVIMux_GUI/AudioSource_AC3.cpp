@@ -316,10 +316,10 @@ int AC3SOURCE::ReadFrame(void* lpDest, DWORD* lpdwMicroSecRead,
 	double z=((double)dwRead/dwBitrate);
 
 	if (lpqwNanoSecRead) 
-		*lpqwNanoSecRead=round(8000000*z);
+		*lpqwNanoSecRead=avimux_round(8000000*z);
 	
 	if (lpdwMicroSecRead) 
-		*lpdwMicroSecRead=(DWORD)round(8000*z);
+		*lpdwMicroSecRead=(DWORD)avimux_round(8000*z);
 	
 //	if (dwReturnSilence) dwReturnSilence--;
 

@@ -322,7 +322,7 @@ DWORD SUPERINDEX::Store(void* lpDest)
 			if (lpCurr->GetKindOfStream()==AVI_VIDEOSTREAM)
 			{
 				// Video: dwStreamTicks = Anzahl Frames = Anzahl Einträge
-				*lpdwDest++=(DWORD)round((lpCurr->GetChunkSize()-32)/8);
+				*lpdwDest++=(DWORD)avimux_round((lpCurr->GetChunkSize()-32)/8);
 			}
 			else
 			if (lpCurr->GetKindOfStream()==AVI_AUDIOSTREAM)
@@ -332,12 +332,12 @@ DWORD SUPERINDEX::Store(void* lpDest)
 				
 				{
 					// CBR
-					*lpdwDest++=(DWORD)round(DWORD(lpCurr->GetCurrentStreamSize()-qwLastStreamSize)/lpHeader->dwScale);
+					*lpdwDest++=(DWORD)avimux_round(DWORD(lpCurr->GetCurrentStreamSize()-qwLastStreamSize)/lpHeader->dwScale);
 				}
 				else
 				{
 					// VBR
-					*lpdwDest++=(DWORD)round((lpCurr->GetChunkSize()-32)/8);
+					*lpdwDest++=(DWORD)avimux_round((lpCurr->GetChunkSize()-32)/8);
 				}
 			}
 			else

@@ -1,4 +1,4 @@
-/*
+﻿/*
 
   RIFFFILE		reading of RIFF structure files, such as WAV, AVI
 
@@ -17,19 +17,20 @@ const int FA_READ = 0x01;
 const int FA_WRITE = 0x02;
 const int FA_DUMMY = 0x04;
 
-typedef struct CHUNKHEADER
+struct CHUNKHEADER
 {
 	DWORD	dwFourCC;
 	DWORD   dwLength;
-} *LPCHUNKHEADER;
+};
+typedef struct CHUNKHEADER *LPCHUNKHEADER;
 
-typedef struct LISTHEADER
+struct LISTHEADER
 {
 	DWORD	dwListID;
 	DWORD   dwLength;
 	DWORD   dwFourCC;
-} *LPLISTHEADER;
-
+} ;
+typedef struct LISTHEADER *LPLISTHEADER;
 
 class RIFFFILE
 {

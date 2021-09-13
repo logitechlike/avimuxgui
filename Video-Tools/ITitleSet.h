@@ -1,11 +1,11 @@
-#ifndef I_ITITLE_SET
+﻿#ifndef I_ITITLE_SET
 #define I_ITITLE_SET
 
-typedef struct 
+struct Title_t
 {
 	char* titleString;
 	char* titleLanguage;
-} Title_t;
+} ;
 
 
 /** \brief This interface provides access to a title set, i.e. a collectioon

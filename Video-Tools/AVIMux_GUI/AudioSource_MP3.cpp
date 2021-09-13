@@ -203,7 +203,7 @@ int MP3SOURCE::Open(STREAM* lpStream)
 	if (dwBitrate>0) {
 		float fSize; int iPadd;
 		fh->GetFrameSize(&iPadd,&fSize);
-		iFrameDuration=round((double)8000000*(double)fSize/(double)dwBitrate);
+		iFrameDuration=avimux_round((double)8000000*(double)fSize/(double)dwBitrate);
 	} else {
 		iFrameDuration=FRAMEDURATION_UNKNOWN;
 	}
@@ -454,8 +454,8 @@ int MP3SOURCE::ReadFrame(void* lpDest,DWORD* lpdwMicroSecRead,__int64* lpqwNanoS
 	{
 		dwRingBuffer[dwRingBufferPos++]=fh->GetBitrate();
 		dwRingBufferPos%=1024;
-		if (lpdwMicroSecRead) *lpdwMicroSecRead=(DWORD)round((double)(fSize)/(double)fh->GetBitrate()*8000.0);
-		if (lpqwNanoSecRead) *lpqwNanoSecRead=round((double)(fSize)/(double)fh->GetBitrate()*8000000.0);
+		if (lpdwMicroSecRead) *lpdwMicroSecRead=(DWORD)avimux_round((double)(fSize)/(double)fh->GetBitrate()*8000.0);
+		if (lpqwNanoSecRead) *lpqwNanoSecRead=avimux_round((double)(fSize)/(double)fh->GetBitrate()*8000000.0);
 		return (GetSource()->Read(lpdwDest,dwFrameSize-4)+4);
 	}
 	else
@@ -509,8 +509,8 @@ int MP3SOURCE::doRead(void* lpDest,DWORD dwMicroSecDesired,DWORD* lpdwMicroSecRe
 			// byte mode
 				dwBytes=(DWORD)((__int64)dwMicroSecDesired*(__int64)dwBitrate/8000);
 				dwRes=GetSource()->Read(lpDest,dwBytes);
-				if (lpdwMicroSecRead) *lpdwMicroSecRead=(DWORD)round(8000.0*(double)dwRes/(double)dwBitrate);
-				if (lpqwNanoSecRead) *lpqwNanoSecRead=round((double)8000000*(double)dwRes/(double)dwBitrate);
+				if (lpdwMicroSecRead) *lpdwMicroSecRead=(DWORD)avimux_round(8000.0*(double)dwRes/(double)dwBitrate);
+				if (lpqwNanoSecRead) *lpqwNanoSecRead=avimux_round((double)8000000*(double)dwRes/(double)dwBitrate);
 				return dwRes;
 				break;
 			case FRAMEMODE_ON:
@@ -562,7 +562,7 @@ int MP3SOURCE::ReadFrame(MULTIMEDIA_DATA_PACKET** packet)
 		dwRingBuffer[dwRingBufferPos++]=fh->GetBitrate();
 		dwRingBufferPos%=1024;
 
-		__int64 qwNanoSecRead = round((double)(fSize)/(double)fh->GetBitrate()*8000000.0);
+		__int64 qwNanoSecRead = avimux_round((double)(fSize)/(double)fh->GetBitrate()*8000000.0);
 
 		(*packet)->duration = qwNanoSecRead;
 		(*packet)->frameSizes.push_back(static_cast<int>(dwFrameSize));
@@ -616,7 +616,7 @@ int MP3SOURCE::GetFrequency(void)
 
 int MP3SOURCE::GetMicroSecPerFrame(void)
 {
-	return (DWORD)round(dwNanoSecPerFrame/1000);
+	return (DWORD)avimux_round(dwNanoSecPerFrame/1000);
 }
 
 __int64 MP3SOURCE::GetNanoSecPerFrame(void)

@@ -1,15 +1,15 @@
-#ifndef I_VIDEOSOURCE_LIST
+﻿#ifndef I_VIDEOSOURCE_LIST
 #define I_VIDEOSOURCE_LIST
 
 #include "videosource_generic.h"
 
-typedef struct
+struct VIDEOSOURCELIST_INFO
 {
 	VIDEOSOURCE**	videosources;
 	VIDEOSOURCE*	curr_source;
 	int				iCount;
 	int				iActiveSource;
-} VIDEOSOURCELIST_INFO;
+} ;
 
 class VIDEOSOURCELIST: public VIDEOSOURCE
 {

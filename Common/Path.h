@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Windows.h"
 #include "UTF-8.h"
@@ -6,6 +6,7 @@
 #include <vector>
 #include <deque>
 #include <stdexcept>
+#include <iterator>
 
 #ifndef MAX_LONG_PATH
 #define MAX_LONG_PATH 32768
@@ -252,7 +253,7 @@ private:
 	}
 
 public:
-	/** \brief Ruft zu einem Pfad den verf�gbaren freien Speicher ab.
+	/** \brief Ruft zu einem Pfad den verf黦baren freien Speicher ab.
 	 */
 	static unsigned __int64 GetAvailableSpace(const CUTF8& path) {
 		std::wstring strPath = path;
@@ -353,8 +354,7 @@ public:
 		std::deque<std::basic_string<TChar>> in_components;
 		std::deque<std::basic_string<TChar>> out_components;
 		bool inputIsNetworkShare = false;
-		split(in, PathSeperator<TChar>(), std::insert_iterator<std::deque<std::basic_string<TChar>>>(
-			in_components, in_components.end()));
+		split(in, PathSeperator<TChar>(), std::insert_iterator<std::deque<std::basic_string<TChar>>>(in_components, in_components.end()));
 
 		// if the input string starts with \\ and is not UNC, it is a network share. Those leading backslashes must
 		// be removed to create a UNC path

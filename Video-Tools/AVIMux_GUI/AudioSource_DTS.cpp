@@ -230,13 +230,13 @@ int DTSSOURCE::ReadFrame(void* lpDest,DWORD* lpdwMicroSecRead,__int64 *lpqwNanoS
 	}
 
 	//double z=((double)dwRead/dtsinfo.fBitrate);
-	//if (lpqwNanoSecRead) *lpqwNanoSecRead=round(8000000*z);
-	//if (lpdwMicroSecRead) *lpdwMicroSecRead=(DWORD)round(8000*z);
+	//if (lpqwNanoSecRead) *lpqwNanoSecRead=avimux_round(8000000*z);
+	//if (lpdwMicroSecRead) *lpdwMicroSecRead=(DWORD)avimux_round(8000*z);
 	if (lpqwNanoSecRead)
 		*lpqwNanoSecRead = dtsinfo.nano_seconds_per_frame;
 
 	if (lpdwMicroSecRead)
-		*lpdwMicroSecRead = (DWORD)(round( (((double)dtsinfo.nano_seconds_per_frame) + 499.0) / 1000.0));
+		*lpdwMicroSecRead = (DWORD)(avimux_round( (((double)dtsinfo.nano_seconds_per_frame) + 499.0) / 1000.0));
 
 	return dwRead;
 }
