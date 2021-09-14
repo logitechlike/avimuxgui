@@ -861,10 +861,10 @@ int MATROSKA::Open(STREAM* s, int iMode)
 		sprintf(ver, "File type: Matroska v%d", ebml_info.DocTypeVersion);
 		Note(ver);
 
-		if (ebml_info.DocTypeVersion > 2) {
-			FatalError("This matroska version is not supported");
-			return MOPEN_ERR;
-		}
+		//if (ebml_info.DocTypeVersion > 2) {
+		//	FatalError("This matroska version is not supported");
+		//	return MOPEN_ERR;
+		//}
 //		newz(SEGMENT_INFO*,e_Segments->iCount, SegmentInfo);
 		SegmentInfo = new SEGMENT_INFO*[e_Segments->iCount];
 	
