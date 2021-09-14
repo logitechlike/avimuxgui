@@ -1,4 +1,4 @@
-#ifndef I_MATROSKASEGMENT
+﻿#ifndef I_MATROSKASEGMENT
 #define I_MATROSKASEGMENT
 
 #ifndef uint
@@ -135,8 +135,15 @@ typedef struct
 	CUE_POINT**		point;
 } TRACK_CUE_POINTS;
 
+typedef struct
+{
+  CBuffer*	addition_mapping_ID;
+  CBuffer*	addition_mapping_IDName;
+  CBuffer*	addition_mapping_IDType;
+  CBuffer*  addition_mapping_IDExtraData;
+} TRACK_INFO_ADDITION_MAPPING;
 
-
+#define ADDITION_MAPPING_COUNT 5
 class TRACK_INFO : public CHasTitles
 {
 public:
@@ -162,6 +169,8 @@ public:
 	CBuffer*	cCodecID;
 	CBuffer*	cCodecName;
 	CBuffer*	cCodecPrivate;
+  //CBuffer*	additionMapping;
+  TRACK_INFO_ADDITION_MAPPING additionMappings[ADDITION_MAPPING_COUNT];
 	TRACK_INFO_AUDIO	audio;
 	TRACK_INFO_VIDEO	video;
 	TRACK_NUMERIC_TAGS	tags;

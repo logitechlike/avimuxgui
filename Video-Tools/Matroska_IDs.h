@@ -1,4 +1,4 @@
-#ifndef I_MATROSKAIDS
+﻿#ifndef I_MATROSKAIDS
 #define I_MATROSKAIDS
 
 #pragma warning(disable:4305)
@@ -99,6 +99,13 @@ const char MID_TR_CODECDECODEALL [] =	{ 0xAA };
 const char MID_TR_TRACKOVERLAY [] =		{ 0x6F, 0xAB };
 const char MID_TR_SAMPLESCALE [] =      { 0x67, 0xEF };
 const char MID_TR_MAXBLOCKADDITIONID []={ 0x55, 0xEE };
+
+const char MID_TR_ADDITION_MAPPING []                = { 0x41, 0xE4 };
+const char MID_TR_ADDITION_MAPPING_ID []             = { 0x41, 0xF0 };
+const char MID_TR_ADDITION_MAPPING_IDName []         = { 0x41, 0xA4 };
+const char MID_TR_ADDITION_MAPPING_IDType []         = { 0x41, 0xE7 };
+const char MID_TR_ADDITION_MAPPING_IDExtraData []    = { 0x41, 0xED };
+
 const char MID_TR_VIDEO [] =			{ 0xE0 };
 const char MID_TRV_FLAGINTERLACED [] =	{ 0x9A };
 const char MID_TRV_STEREOMODE [] =		{ 0x53, 0xB8 };
@@ -244,6 +251,12 @@ const int ETM_TR_CODECDOWNLOADURL	= 0x40B226;
 const int ETM_TR_CODECDECODEALL		= 0xAA;
 const int ETM_TR_TRACKOVERLAY		= 0xAB6F;
 const int ETM_TR_SAMPLESCALE        = 0xEF67;
+
+const int ETM_TR_ADDITION_MAPPING         = 0x41E4;
+const int ETM_TR_ADDITION_MAPPING_ID          = 0x41F0;
+const int ETM_TR_ADDITION_MAPPING_IDName      = 0x41A4;
+const int ETM_TR_ADDITION_MAPPING_IDType      = 0x41E7;
+const int ETM_TR_ADDITION_MAPPING_IDExtraData = 0x41ED;
 
 const int ETM_TR_VIDEO				= 0xE0;
 const int ETM_TR_AUDIO				= 0xE1;

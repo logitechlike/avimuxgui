@@ -1,4 +1,4 @@
-#ifndef I_EBML_MATROSKA
+﻿#ifndef I_EBML_MATROSKA
 #define I_EBML_MATROSKA
 
 #include "ebml.h"
@@ -104,6 +104,13 @@ DECL_CLASS(EBMLM_TRCodecDecodeAll);
 DECL_CLASS(EBMLM_TRTrackOverlay);
 DECL_CLASS(EBMLM_TRSampleScale);
 DECL_CLASS(EBMLM_TRMaxBlockAdditionID);
+
+//DECL_CLASS(EBMLM_TRBlockAdditionMapping);
+DECL_CLASSCID(EBMLM_TRBlockAdditionMapping);
+DECL_CLASS(EBMLM_TRBlockAdditionMapping_ID);
+DECL_CLASS(EBMLM_TRBlockAdditionMapping_IDName);
+DECL_CLASS(EBMLM_TRBlockAdditionMapping_IDType);
+DECL_CLASS(EBMLM_TRBlockAdditionMapping_IDExtraData);
 
 DECL_CLASSCID(EBMLM_TRVideo);
 DECL_CLASS(EBMLM_TRVFlagInterlaced);

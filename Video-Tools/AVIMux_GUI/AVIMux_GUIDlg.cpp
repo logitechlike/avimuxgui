@@ -1,4 +1,4 @@
-// AVIMux_GUIDlg.cpp : Implementierungsdatei
+ï»¿// AVIMux_GUIDlg.cpp : Implementierungsdatei
 //
 
 
@@ -85,6 +85,10 @@ Chinese:
 		       on it, it crashes
 	    - fix: ADTS with CRC
 		- TODO: verify that handler of IDM_SETLANGUAGE gets UTF-8 language name as expected
+
+  1.17.10
+    - remove mkv doctypeversion limit
+    - support dolby vision mkv file ADDITION_MAPPING
 
   1.17.9
         - fixed: project file missed a couple of source files (which where present in the source package, they
@@ -293,7 +297,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CAboutDlg-Dialogfeld für Anwendungsbefehl "Info"
+// CAboutDlg-Dialogfeld fé»µ Anwendungsbefehl "Info"
 
 void ProcessMsgQueue(HWND hwnd)
 {
@@ -317,10 +321,10 @@ public:
 	CStatic	m_Version;
 	//}}AFX_DATA
 
-	// Vom Klassenassistenten generierte Überladungen virtueller Funktionen
+	// Vom Klassenassistenten generierte èº¡erladungen virtueller Funktionen
 	//{{AFX_VIRTUAL(CAboutDlg)
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV-Unterstützung
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV-Untersté»·zung
 	//}}AFX_VIRTUAL
 
 // Implementierung
@@ -366,7 +370,7 @@ CAVIMux_GUIDlg::CAVIMux_GUIDlg(CWnd* pParent /*=NULL*/)
 
 	//{{AFX_DATA_INIT(CAVIMux_GUIDlg)
 	//}}AFX_DATA_INIT
-	// Beachten Sie, dass LoadIcon unter Win32 keinen nachfolgenden DestroyIcon-Aufruf benötigt
+	// Beachten Sie, dass LoadIcon unter Win32 keinen nachfolgenden DestroyIcon-Aufruf bené°igt
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	traceFile = GetApplicationTraceFile();
 	trace.Trace(TRACE_LEVEL_INFO, _T("Main Window created"), _T("Main window instance was created"));
@@ -875,15 +879,15 @@ void CAVIMux_GUIDlg::OnSysCommand(UINT nID, LPARAM lParam)
 	}
 }
 
-// Wollen Sie Ihrem Dialogfeld eine Schaltfläche "Minimieren" hinzufügen, benötigen Sie 
-// den nachstehenden Code, um das Symbol zu zeichnen. Für MFC-Anwendungen, die das 
-// Dokument/Ansicht-Modell verwenden, wird dies automatisch für Sie erledigt.
+// Wollen Sie Ihrem Dialogfeld eine Schaltflé‹he "Minimieren" hinzufé»¦en, bené°igen Sie 
+// den nachstehenden Code, um das Symbol zu zeichnen. Fé»µ MFC-Anwendungen, die das 
+// Dokument/Ansicht-Modell verwenden, wird dies automatisch fé»µ Sie erledigt.
 
 void CAVIMux_GUIDlg::OnPaint() 
 {
 	if (IsIconic())
 	{
-		CPaintDC dc(this); // Gerätekontext für Zeichnen
+		CPaintDC dc(this); // Geré‹žekontext fé»µ Zeichnen
 
 		SendMessage(WM_ICONERASEBKGND, (WPARAM) dc.GetSafeHdc(), 0);
 
@@ -904,7 +908,7 @@ void CAVIMux_GUIDlg::OnPaint()
 	}
 }
 
-// Die Systemaufrufe fragen den Cursorform ab, die angezeigt werden soll, während der Benutzer
+// Die Systemaufrufe fragen den Cursorform ab, die angezeigt werden soll, wé‹’rend der Benutzer
 //  das zum Symbol verkleinerte Fenster mit der Maus zieht.
 HCURSOR CAVIMux_GUIDlg::OnQueryDragIcon()
 {
@@ -1226,7 +1230,7 @@ void CAVIMux_GUIDlg::AddSubtitleStream(SUBTITLE_STREAM_INFO* ssi)
 void CAVIMux_GUIDlg::OnAddFile() 
 {
 //	CFileDialog*	cfd;
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 
 	std::string c;
 
@@ -1268,7 +1272,7 @@ void CAVIMux_GUIDlg::CopyFontQualitySettingFromMainWindow()
 
 void CAVIMux_GUIDlg::OnOK() 
 {
-	// TODO: Zusätzliche Prüfung hier einfügen
+	// TODO: Zusé‹žzliche Pré»¤ung hier einfé»¦en
 	CResizeableDialog::OnOK();
 }
 
@@ -1375,7 +1379,7 @@ void CAVIMux_GUIDlg::UpdateAudiodelay()
 
 void CAVIMux_GUIDlg::OnStart() 
 {
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	CFileDialog*	cfd = NULL;
 	DEST_AVI_INFO*	lpDAI;
 	int				i;//,j;
@@ -1420,7 +1424,7 @@ void CAVIMux_GUIDlg::OnStart()
 	lpDAI->split_points = new CSplitPoints;
 	lpDAI->settings = settings->Duplicate();
 
-// Formatierung für Numerierung
+// Formatierung fé»µ Numerierung
 	if (!lpDAI->settings->GetInt("output/general/numbering/enabled")) {
 		//lpDAI->lpFormat=new char[5+lstrlen("$Name")];
 		//lstrcpy(lpDAI->lpFormat,"$Name");
@@ -1478,9 +1482,9 @@ void CAVIMux_GUIDlg::OnStart()
 		}
 	}
 
-// maximale Größe in MB beachten?
+// maximale Gré²že in MB beachten?
 //	dwUseMaxSize=sfOptions.dwUseMaxFileSize;
-// maximale Dateigröße
+// maximale Dateigré²že
 
 	dwUseMaxSize = (DWORD)settings->GetInt("output/general/file size/limited");
 
@@ -1575,7 +1579,7 @@ void CAVIMux_GUIDlg::OnStart()
 	lpDAI->dwNbrOfAudioStreams=audio_streams.size();
 //	lpDAI->asi=new AUDIO_STREAM_INFO*[1+audio_streams.size()];
 
-// Geht nicht, wenn weder Video noch Audio verfügbar ist
+// Geht nicht, wenn weder Video noch Audio verfé»¦bar ist
 	if (!lpDAI->dwNbrOfAudioStreams && !lpDAI->dwNbrOfVideoStreams) {
 		ButtonState_STOP();
 		return;
@@ -1923,7 +1927,7 @@ void CAVIMux_GUIDlg::OnStart()
 
 DWORD CAVIMux_GUIDlg::Clear()
 {
-	// TODO: Zusätzlichen Bereinigungscode hier einfügen
+	// TODO: Zusé‹žzlichen Bereinigungscode hier einfé»¦en
 	int					i;
 	int					iNbr;
 	AUDIO_STREAM_INFO*	asi;
@@ -2083,7 +2087,7 @@ void CAVIMux_GUIDlg::OnCancel()
 
 void CAVIMux_GUIDlg::OnStop() 
 {
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	ButtonState_STOP();
 	StopMuxing(true);
 }
@@ -2138,14 +2142,14 @@ void name_without_ext(const char* lpcName, char* cNoExt)
 
 void CAVIMux_GUIDlg::OnLButtonUp(UINT nFlags, CPoint point) 
 {
-	// TODO: Code für die Behandlungsroutine für Nachrichten hier einfügen und/oder Standard aufrufen
+	// TODO: Code fé»µ die Behandlungsroutine fé»µ Nachrichten hier einfé»¦en und/oder Standard aufrufen
 	
 	CResizeableDialog::OnLButtonUp(nFlags, point);
 }
 
 void CAVIMux_GUIDlg::OnMaxsizeExtended() 
 {
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 
 }
 
@@ -2721,7 +2725,7 @@ void CAVIMux_GUIDlg::doSaveConfig(const char* lpcFile, int clear)
 
 void CAVIMux_GUIDlg::OnSave() 
 {
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	CFileDialog*	cfd;
 
 	cfd=new CFileDialog(false,"amg");
@@ -2735,7 +2739,7 @@ void CAVIMux_GUIDlg::OnSave()
 
 void CAVIMux_GUIDlg::OnLoad() 
 {
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	CFileDialog*	cfd;
 	CONFIGDATA		conf;
 	CFileStream*		file;
@@ -2769,7 +2773,7 @@ bool	bSetOutputOptions;
 
 BOOL CAVIMux_GUIDlg::OnCommand(WPARAM wParam, LPARAM lParam) 
 {
-	// TODO: Speziellen Code hier einfügen und/oder Basisklasse aufrufen
+	// TODO: Speziellen Code hier einfé»¦en und/oder Basisklasse aufrufen
 	int	i;
 	char*	cParam=(char*)lParam;
 	WPARAM	wOldWParam = wParam;
@@ -2960,7 +2964,7 @@ BOOL CAboutDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-	// TODO: Zusätzliche Initialisierung hier einfügen
+	// TODO: Zusé‹žzliche Initialisierung hier einfé»¦en
 	
 	SetWindowText(LoadString(STR_AB_TITLE));
 
@@ -2970,7 +2974,7 @@ BOOL CAboutDlg::OnInitDialog()
 	m_Version.SetWindowText(strVersionField.c_str());
 
 	return TRUE;  // return TRUE unless you set the focus to a control
-	              // EXCEPTION: OCX-Eigenschaftenseiten sollten FALSE zurückgeben
+	              // EXCEPTION: OCX-Eigenschaftenseiten sollten FALSE zuré»žkgeben
 }
 
 void CAVIMux_GUIDlg::OnChangeAudioname() 
@@ -3037,7 +3041,7 @@ LRESULT CAVIMux_GUIDlg::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 		}
 	} TraceBadStreamIndex (trace);
 
-	// TODO: Speziellen Code hier einfügen und/oder Basisklasse aufrufen
+	// TODO: Speziellen Code hier einfé»¦en und/oder Basisklasse aufrufen
 	ZeroMemory(B,sizeof(B));
 
 	if (message == WM_NOTIFY) {
@@ -4102,7 +4106,7 @@ void CAVIMux_GUIDlg::ResetStreamSourceFileDisplayFlag()
 void CAVIMux_GUIDlg::OnSelchangedAudiotree(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	NM_TREEVIEW* pNMTreeView = (NM_TREEVIEW*)pNMHDR;
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	
 	AUDIO_STREAM_INFO* asi = NULL;
 	SUBTITLE_STREAM_INFO* ssi = NULL;
@@ -4244,7 +4248,7 @@ void CAVIMux_GUIDlg::OnSelchangedAudiotree(NMHDR* pNMHDR, LRESULT* pResult)
 void CAVIMux_GUIDlg::OnItemexpandedAudiotree(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	NM_TREEVIEW* pNMTreeView = (NM_TREEVIEW*)pNMHDR;
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	m_StreamTree.Invalidate();
 	m_StreamTree.UpdateWindow();
 
@@ -4253,7 +4257,7 @@ void CAVIMux_GUIDlg::OnItemexpandedAudiotree(NMHDR* pNMHDR, LRESULT* pResult)
 
 void CAVIMux_GUIDlg::OnSelchangeSourcefilelist() 
 {
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	FILE_INFO*	fi;
 	int iIndex;
 
@@ -4296,7 +4300,7 @@ void CAVIMux_GUIDlg::ApplyCurrentLanguageCode()
 
 void CAVIMux_GUIDlg::OnEditchangeStreamLng() 
 {
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 }
 
 void CAVIMux_GUIDlg::OnSelchangeStreamLng() 
@@ -4312,7 +4316,7 @@ void CAVIMux_GUIDlg::OnSelchangeStreamLng()
 
 void CAVIMux_GUIDlg::OnEditupdateStreamLng() 
 {
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	OnSelchangeStreamLng();
 
 }
@@ -4325,7 +4329,7 @@ void CAVIMux_GUIDlg::OnGetAudiodispinfo(NMHDR* pNMHDR, LRESULT* pResult)
 void CAVIMux_GUIDlg::OnBeginlabeleditAudiotree(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	TV_DISPINFO* pTVDispInfo = (TV_DISPINFO*)pNMHDR;
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	
 	AUDIO_STREAM_INFO* asi = NULL;
 	TREE_ITEM_INFO*	   tii = NULL;
@@ -4360,7 +4364,7 @@ void CAVIMux_GUIDlg::OnBeginlabeleditAudiotree(NMHDR* pNMHDR, LRESULT* pResult)
 void CAVIMux_GUIDlg::OnEndlabeleditAudiotree(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	TV_DISPINFO* pTVDispInfo = (TV_DISPINFO*)pNMHDR;
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	
 	TREE_ITEM_INFO*	   tii = NULL;
 	HTREEITEM hItem = pTVDispInfo->item.hItem;
@@ -4409,7 +4413,7 @@ void CAVIMux_GUIDlg::OnChangeOutputresolution()
 
 BOOL CAVIMux_GUIDlg::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult) 
 {
-	// TODO: Speziellen Code hier einfügen und/oder Basisklasse aufrufen
+	// TODO: Speziellen Code hier einfé»¦en und/oder Basisklasse aufrufen
 	if (wParam == IDC_AUDIOTREE) {
 		Sleep(1);
 		int code = ((NMHDR*)lParam)->code; // TVN_BEGINDRAG
@@ -4422,16 +4426,16 @@ BOOL CAVIMux_GUIDlg::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 
 void CAVIMux_GUIDlg::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) 
 {
-	// TODO: Code für die Behandlungsroutine für Nachrichten hier einfügen und/oder Standard aufrufen
+	// TODO: Code fé»µ die Behandlungsroutine fé»µ Nachrichten hier einfé»¦en und/oder Standard aufrufen
 	
 	CResizeableDialog::OnKeyDown(nChar, nRepCnt, nFlags);
 }
 
 void CAVIMux_GUIDlg::OnChapterEditor() 
 {
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	CChapterDlg* ccdlg;
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 
 	ccdlg = new CChapterDlg;
 	ccdlg->SetChapters(chapters);
@@ -4460,7 +4464,7 @@ void CAVIMux_GUIDlg::OnDestroy()
 		delete settings;
 	}
 
-	// TODO: Code für die Behandlungsroutine für Nachrichten hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine fé»µ Nachrichten hier einfé»¦en
 }
 
 bool CAVIMux_GUIDlg::ManualTabStopOrder()
@@ -4486,7 +4490,7 @@ bool CAVIMux_GUIDlg::ManualTabStopOrder()
 
 void CAVIMux_GUIDlg::OnKillfocusStreamLng() 
 {
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	if (tab_stop_hist == 1 && ManualTabStopOrder()) {
 		tab_stop_hist = -1;
 		
@@ -4503,7 +4507,7 @@ void CAVIMux_GUIDlg::OnKillfocusStreamLng()
 
 void CAVIMux_GUIDlg::OnKillfocusAudiotree(NMHDR* pNMHDR, LRESULT* pResult) 
 {
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	HTREEITEM hItem = m_StreamTree.GetSelectedItem();
 	TREE_ITEM_INFO* tii = m_StreamTree.GetItemInfo(hItem);
 
@@ -4527,7 +4531,7 @@ void CAVIMux_GUIDlg::OnKillfocusAudiotree(NMHDR* pNMHDR, LRESULT* pResult)
 
 void CAVIMux_GUIDlg::OnKillfocusDelay() 
 {
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	HTREEITEM hItem = m_StreamTree.GetSelectedItem();
 
 	if (hItem == hDelayedStream && ManualTabStopOrder()) {
@@ -4541,7 +4545,7 @@ void CAVIMux_GUIDlg::OnKillfocusDelay()
 
 void CAVIMux_GUIDlg::OnSetfocusDelay() 
 {
-	// TODO: Code für die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfügen
+	// TODO: Code fé»µ die Behandlungsroutine der Steuerelement-Benachrichtigung hier einfé»¦en
 	hDelayedStream = m_StreamTree.GetSelectedItem();
 }
 
@@ -4563,31 +4567,31 @@ void CAVIMux_GUIDlg::OnSize(UINT nType, int cx, int cy)
 	UpdateProgressList();
 	UpdateProtocolColumn();
 
-	// TODO: Fügen Sie hier Ihren Meldungsbehandlungscode ein.
+	// TODO: Fé»¦en Sie hier Ihren Meldungsbehandlungscode ein.
 }
 
 void CAVIMux_GUIDlg::OnLvnItemchangedProgressList(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
-	// TODO: Fügen Sie hier Ihren Kontrollbehandlungscode für die Benachrichtigung ein.
+	// TODO: Fé»¦en Sie hier Ihren Kontrollbehandlungscode fé»µ die Benachrichtigung ein.
 	*pResult = 0;
 }
 
 void CAVIMux_GUIDlg::OnBnClickedLeave()
 {
-	// TODO: Fügen Sie hier Ihren Kontrollbehandlungscode für die Benachrichtigung ein.
+	// TODO: Fé»¦en Sie hier Ihren Kontrollbehandlungscode fé»µ die Benachrichtigung ein.
 	OnCancel();
 
 }
 
 void CAVIMux_GUIDlg::OnBnClickedCancel()
 {
-	// TODO: Fügen Sie hier Ihren Kontrollbehandlungscode für die Benachrichtigung ein.
+	// TODO: Fé»¦en Sie hier Ihren Kontrollbehandlungscode fé»µ die Benachrichtigung ein.
 }
 
 void CAVIMux_GUIDlg::OnLbnDblclkSourcefilelist()
 {
-	// TODO: Fügen Sie hier Ihren Kontrollbehandlungscode für die Benachrichtigung ein.
+	// TODO: Fé»¦en Sie hier Ihren Kontrollbehandlungscode fé»µ die Benachrichtigung ein.
 	int iIndex = m_SourceFiles.GetCurSel();
 	if (iIndex == LB_ERR)
 		return;

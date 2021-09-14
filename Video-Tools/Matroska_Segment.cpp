@@ -1,4 +1,4 @@
-/*
+﻿/*
 
 Class to handle one segment of a matroska file
 ----------------------------------------------
@@ -58,6 +58,13 @@ TRACK_INFO::TRACK_INFO()
 	cCodecID = NULL;
 	cCodecName = NULL;
 	cCodecPrivate = NULL;
+  for (int i =0; i < ADDITION_MAPPING_COUNT; i++)
+  {
+    additionMappings[i].addition_mapping_ID = NULL;
+    additionMappings[i].addition_mapping_IDName = NULL;
+    additionMappings[i].addition_mapping_IDType = NULL;
+    additionMappings[i].addition_mapping_IDExtraData = NULL;
+  }
 	memset(&tags, 0, sizeof(tags));
 	// additional stuff
 //	iCompression = 0;
@@ -1328,9 +1335,11 @@ int EBMLM_Segment::RetrieveInfo()
 			else 
 				t->iSparse = 1;
 
+      int  additionMappingindex = 0;
 			e->Create1stSub(&e_next);
 			while (e_next) {
 				e_old = e_next;
+        int e_old_type = e_old->GetType();
 				switch (e_old->GetType()) {
 					case ETM_TR_NAME: 
 						t->GetTitleSet()->SetTitle(e_old->GetData()->AsString()); 
@@ -1345,6 +1354,25 @@ int EBMLM_Segment::RetrieveInfo()
 							Warning("TrackTimecodescale not between 10^-9 and 10^9 !");
 						} else t->fTimecodeScale = f;
 						break;
+          case ETM_TR_ADDITION_MAPPING:
+            {
+              //e_old->GetData()->Refer(&t->additionMapping);
+              char* search_ids[] = {
+                (char*)MID_TR_ADDITION_MAPPING_ID, (char*)MID_TR_ADDITION_MAPPING_IDName,
+                (char*)MID_TR_ADDITION_MAPPING_IDType, (char*)MID_TR_ADDITION_MAPPING_IDExtraData, NULL };
+              void* targets[] = {
+                &t->additionMappings[additionMappingindex].addition_mapping_ID, &t->additionMappings[additionMappingindex].addition_mapping_IDName,
+                &t->additionMappings[additionMappingindex].addition_mapping_IDType, &t->additionMappings[additionMappingindex].addition_mapping_IDExtraData, NULL };
+              int occ_restr[] = {
+                2, 2,
+                2, 2, 0 };
+              SEARCHMULTIEX sme = { search_ids, targets, occ_restr };
+              EBMLElementVectors search;
+              e_old->SearchMulti(search, sme);
+              DeleteVectors(search);
+              additionMappingindex++;
+            }
+            break;
 					case ETM_TR_VIDEO: 
 						{
 							char* search_ids[] = {
@@ -1468,6 +1496,10 @@ int EBMLM_Segment::RetrieveInfo()
 							DeleteElementList(&e_ContentEncoding);
 							DeleteVectors(cp_search);
 						} break;
+          default:
+            int type = e_old->GetType();
+            int type2 = e_old->GetType();
+            break;
 				}
 				e_next = e_next->GetSucc();
 				DeleteEBML(&e_old);
